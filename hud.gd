@@ -15,7 +15,7 @@ func show_game_over():
 	# Подождите, пока MessageTimer не завершит обратный отсчет.
 	await $MessageTimer.timeout
 	
-	$Message.text = "Увернись от Крипов"
+	$Message.text = "Увернись от Крипов!"
 	$Message.show()
 	# Заведите таймер на один заход и дождитесь его окончания.
 	await get_tree().create_timer(1.0).timeout
