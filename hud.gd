@@ -12,11 +12,13 @@ func show_message(text):
 # Вызывается когда игрок проигрывает
 func show_game_over():
 	show_message("Игра окончена")
+	$anger.show()
 	# Подождите, пока MessageTimer не завершит обратный отсчет.
 	await $MessageTimer.timeout
 	
 	$Message.text = "Увернись от Крипов!"
 	$Message.show()
+	$DDW.show()
 	# Заведите таймер на один заход и дождитесь его окончания.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
@@ -26,8 +28,10 @@ func update_score(score):
 
 func _on_start_button_pressed():
 	$StartButton.hide()
+	$DDW.hide()
 	start_game.emit()
 
 
 func _on_message_timer_timeout():
 	$Message.hide()
+	$anger.hide()

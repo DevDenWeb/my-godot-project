@@ -1,10 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7kraeuxafe7g"]
+[gd_scene load_steps=7 format=3 uid="uid://b7kraeuxafe7g"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_871yq"]
 [ext_resource type="FontFile" uid="uid://b6jaiidpefa7k" path="res://fonts/Xolonium-Regular.ttf" id="1_ln8pc"]
+[ext_resource type="Texture2D" uid="uid://bm65knxqu6ijr" path="res://art/logo.png" id="2_uuh5a"]
+[ext_resource type="Texture2D" uid="uid://d3nfrdt8w2j2x" path="res://art/anger.jpg" id="3_e7w2g"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ako44"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_cdmf1"]
+events = [SubResource("InputEventAction_ako44")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_871yq")
+
+[node name="DDW" type="TextureRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("2_uuh5a")
+expand_mode = 1
+
+[node name="anger" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 111.0
+offset_right = 150.0
+offset_bottom = 271.0
+grow_horizontal = 2
+texture = ExtResource("3_e7w2g")
+expand_mode = 1
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -54,6 +85,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_ln8pc")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_cdmf1")
 text = "Старт"
 
 [node name="MessageTimer" type="Timer" parent="."]
