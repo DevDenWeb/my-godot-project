@@ -4,6 +4,9 @@ signal hit
 @export var speed = 400
 var screen_size
 
+var target_position: Vector2
+var is_touching: bool = false
+
 func start(pos):
 	position = pos
 	show()
@@ -16,8 +19,19 @@ func _on_body_entered(_body):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	target_position = global_position
 	screen_size = get_viewport_rect().size
 	hide()
+
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			is_touching = true
+			target_position = event.position
+		else:
+			is_touching = false
+	elif event is InputEventScreenDrag:
+		target_position = event.position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -47,3 +61,8 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+	
+	if is_touching:
+		var direction = (target_position - global_position).normalized()
+		if global_position.distance_to(target_position) > 5.0:
+			global_position += direction * speed * delta
